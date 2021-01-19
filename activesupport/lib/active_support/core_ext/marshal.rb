@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
+require "active_support/core_ext/string/inflections"
+
 module ActiveSupport
   module MarshalWithAutoloading # :nodoc:
-    def load(source)
-      super(source)
+    def load(source, proc = nil)
+      super(source, proc)
     rescue ArgumentError, NameError => exc
       if exc.message.match(%r|undefined class/module (.+?)(?:::)?\z|)
         # try loading the class/module
